@@ -1,0 +1,108 @@
+﻿<Window x:Class="Port.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Port Management" Height="450" Width="800" Background="#FF2D2F45">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#005A9E"/>
+        </Style>
+
+        <!-- Стиль для ScrollBar -->
+        <Style x:Key="TransparentScrollBar" TargetType="ScrollBar">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid x:Name="Grid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Track x:Name="PART_Track" Grid.Row="1" IsDirectionReversed="true">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Background="Transparent"/>
+                                </Track.Thumb>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineUpCommand" Style="{x:Null}" 
+                                              Background="Transparent" BorderBrush="Transparent" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineDownCommand" Style="{x:Null}" 
+                                              Background="Transparent" BorderBrush="Transparent" />
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Верхняя панель с текстовым полем и кнопками -->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FF28293D" Margin="10">
+            <Label Content="Портты еңгіз →" FontFamily="Nirmala UI" FontWeight="Bold" Margin="20,0,10,0" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBox x:Name="portTextBox" Width="100" Margin="10,0,10,0" VerticalAlignment="Center" ToolTip="Введите порт"/>
+            <Button Content="Портты ашу" Click="OpenPort_Click" Margin="0,5,5,5" BorderBrush="{x:Null}" FontFamily="Nirmala UI" FontWeight="Bold" Padding="20,10,20,10">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5561FF"/>
+                        <GradientStop Color="#FF3643FC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="Портты жабу" Click="ClosePort_Click" Margin="0,5,5,5" BorderBrush="{x:Null}" FontFamily="Nirmala UI" FontWeight="Bold" Padding="20,10,20,10">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5561FF"/>
+                        <GradientStop Color="#FF3643FC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="Жаңарту" Click="Refresh_Click" Margin="0,5,5,5" BorderBrush="{x:Null}" FontFamily="Nirmala UI" FontWeight="Bold" Padding="20,10,20,10">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5561FF"/>
+                        <GradientStop Color="#FF3643FC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <!-- Основное содержимое с метками -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Transparent">
+            <ScrollViewer.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource TransparentScrollBar}"/>
+            </ScrollViewer.Resources>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="openPortsTextBox" Text="Открытые порты:" Grid.Column="0" VerticalAlignment="Top" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FF242537" Foreground="White"/>
+                <TextBox x:Name="closedPortsTextBox" Text="Закрытые порты:" Grid.Column="1" VerticalAlignment="Top" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FF242537" Foreground="White"/>
+                <TextBox x:Name="noOptionPortsTextBox" Text="Порты без опций:" Grid.Column="2" VerticalAlignment="Top" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FF242537" Foreground="White"/>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
