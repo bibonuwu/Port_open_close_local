@@ -82,6 +82,9 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <Label Width="107">
+                <TextBlock Text="by Қанат Аружан Қанатқызы" TextWrapping="Wrap" Foreground="White"/>
+            </Label>
         </StackPanel>
 
         <!-- Основное содержимое с метками -->
